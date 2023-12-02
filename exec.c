@@ -21,7 +21,7 @@ void execCmd(char cmd)
 	}
 	argv[a] = NULL;
 
-	if (execve(cmd, argv, NULL) == -1)
+	if (execve(cmd2, argv, NULL) == -1)
 	{
 		perror("Command execution error");
 		exit(98);
