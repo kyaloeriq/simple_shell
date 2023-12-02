@@ -3,13 +3,25 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
+#include "main.h"
+char *my_strdup(const char *s)
+{
+	size_t len = strlen(s) + 1;
+	char *dup = malloc(len);
+
+	if (dup != NULL)
+	{
+		strcpy(dup, s);
+	}
+	return (dup);
+}
 /**
  * execCmd - executes commands
  * @cmd: command
  */
-void execCmd(char command)
+void execCmd(char *command)
 {
-	char *cmd = strdup(command);
+	char *cmd = my_strdup(command);
 	char *tkn = strtok(cmd, " ");
 	char *argv[10];
 	int a = 0;
