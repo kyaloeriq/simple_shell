@@ -7,10 +7,10 @@
  * execCmd - executes commands
  * @cmd: command
  */
-void execCmd(char cmd)
+void execCmd(char command)
 {
-	char *tkn = strtok(cmd, "");
-	char *cmd2 = tkn;
+	char *cmd = strdup(command);
+	char *tkn = strtok(cmd, " ");
 	char *argv[10];
 	int a = 0;
 
@@ -21,9 +21,10 @@ void execCmd(char cmd)
 	}
 	argv[a] = NULL;
 
-	if (execve(cmd2, argv, NULL) == -1)
+	if (execve(argv[0], argv, NULL) == -1)
 	{
 		perror("Command execution error");
 		exit(98);
 	}
+	free(cmd);
 }

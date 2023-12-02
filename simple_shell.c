@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+#include "main.h"
 /**
  * main - UNIX command line interpreter
  * Return: 0
@@ -9,6 +13,7 @@ int main(void)
 	char *entry = NULL;
 	size_t length = 0;
 	ssize_t read;
+	pid_t pid;
 
 	while (1)
 	{
@@ -22,7 +27,7 @@ int main(void)
 		/*Remove newline character at the end of entry*/
 		entry[read - 1] = '\0';
 		/*fork a new process*/
-		pid_t pid = fork();
+		pid = fork();
 		if (pid == -1)
 		{
 			perror("Fork error");
