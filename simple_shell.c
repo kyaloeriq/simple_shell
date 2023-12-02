@@ -6,21 +6,21 @@
  */
 int main(void)
 {
-	char *input = 0;
+	char *entry = 0;
 	size_t length = 0;
 	ssize_t read;
 
 	while (1)
 	{
 		printf("Purposedriven#:");
-		read = getline(&input, &length, stdin);/*Read input from the user*/
+		read = getline(&entry, &length, stdin);/*Read input from the user*/
 		if (read == -1)
 		{
-			perror("getline");
-			exit(EXIT_FAILURE);
+			perror("Input Error");
+			exit(98);
 	}
 		/*Execute commands from the input*/
 	}
-	free(input);
+	free(entry);
 	return (0);
 }
