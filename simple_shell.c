@@ -16,14 +16,27 @@ int main(void)
 		read = getline(&entry, &length, stdin);/*Read input from the user*/
 		if (read == -1)
 		{
-			perror("Input Error");
+			perror("Input error");
 			exit(98);
 		}
-		/*Execute commands from the input*/
-		free(entry);/*Free memory allocated for entry*/
-		/*Reset entry and length for next iteration*/
-		entry = NULL;
-		length = 0;
+		/*Remove newline character at the end of entry*/
+		entry[read - 1] = '\0';
+		/*fork a new process*/
+		pid_t pid = fork();
+		if (pid == -1)
+		{
+			perror("Fork error");
+			exit(98);
+		}
+		if (pid == 0)
+		{
+			execCmd(entry);
+		}
+		else
+		{
+			wait(NULL);
+		}
 	}
+	free(entry);/*Free memory allocated for entry*/
 	return (0);
 }
