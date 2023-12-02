@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * main - simple prompt
+ * main - UNIX command line interpreter
  * Return: 0
  */
 int main(void)
 {
-	char *entry = 0;
+	char *entry = NULL;
 	size_t length = 0;
 	ssize_t read;
 
@@ -18,9 +18,12 @@ int main(void)
 		{
 			perror("Input Error");
 			exit(98);
-	}
+		}
 		/*Execute commands from the input*/
+		free(entry);/*Free memory allocated for entry*/
+		/*Reset entry and length for next iteration*/
+		entry = NULL;
+		length = 0;
 	}
-	free(entry);
 	return (0);
 }
