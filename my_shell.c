@@ -33,14 +33,10 @@ int main(void)
 		{
 			exectble = "/usr/bin/cp";
 		}
+		a = 0;
 		while (tkn != NULL && a < MAX_ARGS)
 		{
 			argv[a++] = strdup(tkn);
-			if (argv[a - 1] == NULL)
-			{
-				perror("Memory allocation error");
-				exit(EXIT_FAILURE);
-			}
 			tkn = strtok(NULL, " ");
 		}
 		argv[a] = NULL;
@@ -53,10 +49,10 @@ int main(void)
 			for (i = 0; i < a; ++i)
 			{
 				free(argv[i]);
-				argv[i] = NULL;
 			}
 			continue;
 		}
+		argv[a] = NULL;
 		forkExec(exectble, argv);
 		/*free dynamically allocated memory*/
 		free(command);
