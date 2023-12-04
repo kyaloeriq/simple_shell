@@ -36,6 +36,7 @@ int main(void)
 		if (pid == 0)
 		{
 			execCmd(entry);
+			exit(EXIT_SUCCESS);
 		}
 		else
 		{
