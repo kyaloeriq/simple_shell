@@ -31,7 +31,7 @@ int prompt(void)
 			free(entry);
 			exit(EXIT_SUCCESS);
 		}
-		execCmd(entry);
+		forkExec(entry);
 	}
 	free(entry);/*Free memory allocated for entry*/
 	return (0);
