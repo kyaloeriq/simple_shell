@@ -5,10 +5,10 @@
 #include <string.h>
 #include "main.h"
 /**
- * main - UNIX cmd line interpreter
+ * prompt - simple prompt.
  * Return: 0
  */
-int main(void)
+int prompt(void)
 {
 	char *entry = NULL;
 	size_t length = 0;
