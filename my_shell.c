@@ -36,6 +36,11 @@ int main(void)
 		while (tkn != NULL && a < MAX_ARGS)
 		{
 			argv[a++] = strdup(tkn);
+			if (argv[a - 1] == NULL)
+			{
+				perror("Memory allocation error");
+				exit(EXIT_FAILURE);
+			}
 			tkn = strtok(NULL, " ");
 		}
 		argv[a] = NULL;
@@ -59,6 +64,7 @@ int main(void)
 		for (i = 0; i < a; ++i)
 		{
 			free(argv[i]);
+			argv[i] = NULL;
 		}
 	}
 	return (0);
