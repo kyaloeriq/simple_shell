@@ -15,7 +15,7 @@ void forkExec(char *exectble, char *argv[])
 	}
 	if (pid == 0)
 	{
-		if(execve(exectble, argv, NULL) == -1)
+		if(execve(exectble, argv, environ) == -1)
 		{
 			perror("Command execution error");
 			exit(EXIT_FAILURE);
