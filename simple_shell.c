@@ -31,7 +31,7 @@ int main(void)
 		if (pid == -1)
 		{
 			perror("Fork error");
-			exit(98);
+			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
 		{
