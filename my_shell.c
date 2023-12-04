@@ -10,8 +10,8 @@
 int main(void)
 {
 	char *command = NULL;
-	char *cmd = strdup(command);
-	char *tkn = strtok(cmd, " ");
+	char *cmd = NULL;
+	char *tkn = NULL;
 	char *argv[MAX_ARGS + 1];
 	int i;
 	int a = 0;
@@ -26,7 +26,8 @@ int main(void)
 			free(command);
 			break;
 		}
-
+		cmd = strdup(command);
+		tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
 		if (tkn != NULL && strcmp(tkn, "cp") == 0)
 		{
@@ -44,7 +45,7 @@ int main(void)
 			fprintf(stderr, "Error:%s command not found\n", exectble);
 			free(command);
 			free(cmd);
-			for (i = 0; 1 < a; ++i)
+			for (i = 0; i < a; ++i)
 			{
 				free(argv[i]);
 			}
