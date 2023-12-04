@@ -6,21 +6,17 @@
 #include "main.h"
 /**
  * main - UNIX command line interpreter
+ * Return: 0
  */
 int main(void)
 {
-	char *command = NULL;
-	char *cmd = NULL;
-	char *tkn = NULL;
-	char *argv[MAX_ARGS + 1];
-	int i;
-	int a = 0;
+	char *command = NULL, *cmd = NULL, *tkn = NULL, *argv[MAX_ARGS + 1];
+	int i, a = 0;
 	char *exectble = "/usr/bin/ls";
 
 	while (1)
 	{
 		prompt(&command);
-
 		if (strcmp(command, "exit") == 0)
 		{
 			free(command);
@@ -32,36 +28,26 @@ int main(void)
 		if (tkn != NULL && strcmp(tkn, "cp") == 0)
 		{
 			exectble = "/usr/bin/cp";
-		}
-		a = 0;
+		} a = 0;
 		while (tkn != NULL && a < MAX_ARGS)
 		{
 			argv[a++] = strdup(tkn);
 			tkn = strtok(NULL, " ");
-		}
-		argv[a] = NULL;
+		} argv[a] = NULL;
 		/*Check if the executable file is accessible*/
 		if (access(exectble, X_OK) == -1)
 		{
 			fprintf(stderr, "Error:%s command not found\n", exectble);
-			free(command);
-			free(cmd);
+			free(command), free(cmd);
 			for (i = 0; i < a; ++i)
-			{
 				free(argv[i]);
-			}
 			continue;
 		}
 		argv[a] = NULL;
 		forkExec(exectble, argv);
 		/*free dynamically allocated memory*/
-		free(command);
-		free(cmd);
+		free(command), free(cmd);
 		for (i = 0; i < a; ++i)
-		{
-			free(argv[i]);
-			argv[i] = NULL;
-		}
-	}
-	return (0);
+			free(argv[i]), argv[i] = NULL;
+	} return (0);
 }
