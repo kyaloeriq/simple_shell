@@ -35,14 +35,10 @@ int main(void)
 		int a = 0;
 		char *exectble = "/usr/bin/ls";
 
-		prompt(&command);
 		/*Check if user specified a different command*/
-		if (tkn != NULL)
+		if (tkn != NULL && strcmp(tkn, "cp") == 0)
 		{
-			if (strcmp(tkn, "cp") == 0)
-			{
-				exectble = "/usr/bin/cp";
-			}
+			exectble = "/usr/bin/cp";
 		}
 		while (tkn != NULL && a < MAX_ARGS)
 		{
@@ -54,10 +50,17 @@ int main(void)
 		if (access(exectble, X_OK) == -1)
 		{
 			fprintf(stderr, "Error:%s command not found\n", exectble);
-			continue; 
+			free(command);
+			free(cmd);
+			for (i = 0; 1 < a; ++i)
+			{
+				free(argv[i]);
+			}
+			continue;
 		}
 		forkExec(exectble, argv);
 		/*free dynamically allocated memory*/
+		free(command);
 		free(cmd);
 		for (i = 0; i < a; ++i)
 		{
