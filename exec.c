@@ -30,6 +30,7 @@ void execCmd(char *command)
 	char *tkn = strtok(cmd, " ");
 	char *argv[20];
 	int a = 0;
+	char *exectble = "/usr/bin/ls";
 
 	while (tkn != NULL && a < 19)
 	{
@@ -38,7 +39,7 @@ void execCmd(char *command)
 	}
 	argv[a] = NULL;
 
-	if (execve(argv[0], argv, NULL) == -1)
+	if (execve(exectble, argv, NULL) == -1)
 	{
 		perror("Command execution error");
 		exit(EXIT_FAILURE);
