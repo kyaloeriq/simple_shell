@@ -32,6 +32,14 @@ void execCmd(char *command)
 	int a = 0;
 	char *exectble = "/usr/bin/ls";
 
+	/*Check if user specified a different command*/
+	if (tkn != NULL)
+	{
+		if (strcmp(tkn, "cp") == 0)
+		{
+			exectble = "usr/bin/cp";
+		}
+	}
 	while (tkn != NULL && a < 19)
 	{
 		argv[a++] = tkn;
