@@ -22,10 +22,10 @@ char *my_strdup(const char *s)
 }
 /**
  * main - UNIX command line interpreter
- * @command: command
  */
-void main(char *command)
+int main(void)
 {
+	char *command = "ls";
 	char *cmd = my_strdup(command);
 	char *tkn = strtok(cmd, " ");
 	char *argv[20];
@@ -60,4 +60,5 @@ void main(char *command)
 	{
 		free(argv[i]);
 	}
+	return (0);
 }
