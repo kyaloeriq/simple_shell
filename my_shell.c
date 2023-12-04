@@ -25,16 +25,23 @@ char *my_strdup(const char *s)
  */
 int main(void)
 {
-	int status;
+	char *command;
+	char *cmd = my_strdup(command);
+	char *tkn = strtok(cmd, " ");
+	char *argv[MAX_ARGS + 1];
+	int i;
+	int a = 0;
+	char *exectble = "/usr/bin/ls";
 
-	while ((status = prompt(&command)) != 0)
+	while (1)
 	{
-		char *cmd = my_strdup(command);
-		char *tkn = strtok(cmd, " ");
-		char *argv[MAX_ARGS + 1];
-		int i;
-		int a = 0;
-		char *exectble = "/usr/bin/ls";
+		prompt(&command);
+
+		if (strcmp(command, "exit") == 0)
+		{
+			free(command);
+			break;
+		}
 
 		/*Check if user specified a different command*/
 		if (tkn != NULL && strcmp(tkn, "cp") == 0)
@@ -43,7 +50,7 @@ int main(void)
 		}
 		while (tkn != NULL && a < MAX_ARGS)
 		{
-			argv[a++] = my_strdup(tkn);
+			argv[a++] =strdup(tkn);
 			tkn = strtok(NULL, " ");
 		}
 		argv[a] = NULL;
