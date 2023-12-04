@@ -35,7 +35,7 @@ int main(void)
 		}
 		while (tkn != NULL && a < MAX_ARGS)
 		{
-			argv[a++] =strdup(tkn);
+			argv[a++] = strdup(tkn);
 			tkn = strtok(NULL, " ");
 		}
 		argv[a] = NULL;
@@ -48,6 +48,7 @@ int main(void)
 			for (i = 0; i < a; ++i)
 			{
 				free(argv[i]);
+				argv[i] = NULL;
 			}
 			continue;
 		}
