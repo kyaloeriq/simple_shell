@@ -28,12 +28,12 @@ int main(void)
 	char *command = "ls";
 	char *cmd = my_strdup(command);
 	char *tkn = strtok(cmd, " ");
-	char *argv[20];
+	char *argv[MAX_ARGS + 1];
 	int i;
 	int a = 0;
 	char *exectble = "/usr/bin/ls";
 
-	prompt;
+	prompt();
 	/*Check if user specified a different command*/
 	if (tkn != NULL)
 	{
@@ -42,7 +42,7 @@ int main(void)
 			exectble = "/usr/bin/cp";
 		}
 	}
-	while (tkn != NULL && a < 19)
+	while (tkn != NULL && a < MAX_ARGS)
 	{
 		argv[a++] = my_strdup(tkn);
 		tkn = strtok(NULL, " ");
