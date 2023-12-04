@@ -25,7 +25,7 @@ char *my_strdup(const char *s)
  */
 int main(void)
 {
-	char *command;
+	char *command = NULL;
 	char *cmd = my_strdup(command);
 	char *tkn = strtok(cmd, " ");
 	char *argv[MAX_ARGS + 1];
