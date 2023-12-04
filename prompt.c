@@ -21,16 +21,23 @@ int prompt(void)
 		if (read == -1)
 		{
 			perror("Input error");
-			exit(EXIT_SUCCESS);
+			exit(EXIT_FAILURE);
 		}
 		/*Remove newline character at the end of entry*/
 		entry[read - 1] = '\0';
+		/*Check for empty input*/
+		if (read == 1)
+		{
+			free(entry);
+			continue;
+		}
 		/*Check for the exit command*/
 		if (strcmp(entry, "exit") == 0)
 		{
 			free(entry);
 			exit(EXIT_SUCCESS);
 		}
+		break;
 	}
 	free(entry);/*Free memory allocated for entry*/
 	return (0);

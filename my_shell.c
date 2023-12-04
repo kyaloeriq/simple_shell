@@ -33,6 +33,7 @@ int main(void)
 	int a = 0;
 	char *exectble = "/usr/bin/ls";
 
+	prompt;
 	/*Check if user specified a different command*/
 	if (tkn != NULL)
 	{
