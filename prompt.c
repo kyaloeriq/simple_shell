@@ -11,23 +11,15 @@
 void prompt(char **command)
 {
 	char *entry = NULL;
-	size_t length = 0;
+	size_t size = 0;
 	ssize_t read;
 
 	printf("Purposedriven#:");
-	read = getline(&entry, &length, stdin);/*Read input from the user*/
-	if (read == -1)
+	if (getline(command, &size, stdin) == -1)
 	{
 		perror("Input error");
 		exit(EXIT_FAILURE);
 	}
-	/*Remove newline character at the end of entry*/
-	entry[read - 1] = '\0';
-	*command = strdup(entry);
-	if (*command == NULL)
-	{
-		perror("Memory allocation error");
-		exit(EXIT_FAILURE);
-	}
-	free(entry);/*Free memory allocated by getline*/
+	/*Remove newline character at the end of *command*/
+	(*command)[strcspn(*command, "\n")] = '\0';
 }
