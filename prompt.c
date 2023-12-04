@@ -8,7 +8,7 @@
  * prompt - simple prompt
  * Return: 0
  */
-int prompt(char **command)
+void prompt(char **command)
 {
 	char *entry = NULL;
 	size_t length = 0;
@@ -23,12 +23,11 @@ int prompt(char **command)
 	}
 	/*Remove newline character at the end of entry*/
 	entry[read - 1] = '\0';
-	/*Check for the exit command*/
-	if (strcmp(entry, "exit") == 0)
+	*command = strdup(entry);
+	if (*command == NULL)
 	{
-		free(entry);
-		return (0);
+		perror("Memory allocation error");
+		exit(EXIT_FAILURE);
 	}
-	*command = entry;
-	return (1);/*Indicates program should continue*/
+	free(entry);/*Free memory allocated by getline*/
 }
