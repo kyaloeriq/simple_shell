@@ -3,7 +3,11 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include "main.h"
-
+/**
+ * forkExec - fork and command execution
+ * @exectble: executable command
+ * @argv: arguments
+ */
 void forkExec(char *exectble, char *argv[])
 {
 	pid_t pid = fork();
@@ -15,7 +19,7 @@ void forkExec(char *exectble, char *argv[])
 	}
 	if (pid == 0)
 	{
-		if(execve(exectble, argv, environ) == -1)
+		if (execve(exectble, argv, environ) == -1)
 		{
 			perror("Command execution error");
 			exit(EXIT_FAILURE);
