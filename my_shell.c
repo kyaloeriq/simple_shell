@@ -25,9 +25,10 @@ char *my_strdup(const char *s)
  */
 int main(void)
 {
-	while (1)
+	int status;
+
+	while ((status = prompt(&command)) != 0)
 	{
-		char *command = "prompt()";
 		char *cmd = my_strdup(command);
 		char *tkn = strtok(cmd, " ");
 		char *argv[MAX_ARGS + 1];
