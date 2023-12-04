@@ -27,7 +27,7 @@ int main(void)
 {
 	while (1)
 	{
-		char *command = "ls";
+		char *command = "prompt()";
 		char *cmd = my_strdup(command);
 		char *tkn = strtok(cmd, " ");
 		char *argv[MAX_ARGS + 1];
