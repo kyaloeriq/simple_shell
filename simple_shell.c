@@ -26,7 +26,13 @@ int main(void)
 		}
 		/*Remove newline character at the end of entry*/
 		entry[read - 1] = '\0';
-		/*fork a new process*/
+		/*Check for the exit command*/
+		if (strcmp(entry, "exit") == 0)
+		{
+			free(entry);
+			exit(EXIT_SUCCESS);
+		}
+		/*Fork a new process*/
 		pid = fork();
 		if (pid == -1)
 		{
@@ -41,11 +47,6 @@ int main(void)
 		else
 		{
 			wait(NULL);
-		}
-		if (strcmp(entry, "exit\n") == 0)
-		{
-			free(entry);
-			exit(EXIT_SUCCESS);
 		}
 	}
 	free(entry);/*Free memory allocated for entry*/
