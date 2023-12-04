@@ -21,10 +21,10 @@ char *my_strdup(const char *s)
 	return (dup);
 }
 /**
- * execCmd - executes commands with arguments
+ * main - UNIX command line interpreter
  * @command: command
  */
-void execCmd(char *command)
+void main(char *command)
 {
 	char *cmd = my_strdup(command);
 	char *tkn = strtok(cmd, " ");
