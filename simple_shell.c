@@ -22,7 +22,7 @@ int main(void)
 		if (read == -1)
 		{
 			perror("Input error");
-			exit(98);
+			exit(EXIT_SUCCESS);
 		}
 		/*Remove newline character at the end of entry*/
 		entry[read - 1] = '\0';
@@ -41,6 +41,11 @@ int main(void)
 		else
 		{
 			wait(NULL);
+		}
+		if (strcmp(entry, "exit\n") == 0)
+		{
+			free(entry);
+			exit(EXIT_SUCCESS);
 		}
 	}
 	free(entry);/*Free memory allocated for entry*/
