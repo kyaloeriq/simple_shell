@@ -5,7 +5,7 @@
 #include <string.h>
 #include "main.h"
 /**
- * main - UNIX command line interpreter
+ * main - UNIX cmd line interpreter
  * Return: 0
  */
 int main(void)
