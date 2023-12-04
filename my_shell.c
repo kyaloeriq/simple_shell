@@ -5,28 +5,12 @@
 #include <string.h>
 #include "main.h"
 /**
- * my_strdup - my strdup
- * @s: argument
- * Return: dup
- */
-char *my_strdup(const char *s)
-{
-	size_t len = strlen(s) + 1;
-	char *dup = malloc(len);
-
-	if (dup != NULL)
-	{
-		strcpy(dup, s);
-	}
-	return (dup);
-}
-/**
  * main - UNIX command line interpreter
  */
 int main(void)
 {
 	char *command = NULL;
-	char *cmd = my_strdup(command);
+	char *cmd = strdup(command);
 	char *tkn = strtok(cmd, " ");
 	char *argv[MAX_ARGS + 1];
 	int i;

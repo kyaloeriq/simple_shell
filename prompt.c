@@ -10,9 +10,7 @@
  */
 void prompt(char **command)
 {
-	char *entry = NULL;
 	size_t size = 0;
-	ssize_t read;
 
 	printf("Purposedriven#:");
 	if (getline(command, &size, stdin) == -1)
