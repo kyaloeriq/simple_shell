@@ -6,6 +6,7 @@
 #include "main.h"
 /**
  * prompt - simple prompt
+ * @command: executable commands
  * Return: 0
  */
 void prompt(char **command)
