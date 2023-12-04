@@ -68,6 +68,7 @@ void execCmd(char *command)
 			exit(EXIT_FAILURE);
 		}
 		exit(EXIT_SUCCESS);
+	}
 	else
 	{
 		wait(NULL);
