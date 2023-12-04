@@ -14,31 +14,20 @@ int prompt(void)
 	size_t length = 0;
 	ssize_t read;
 
-	while (1)
+	printf("Purposedriven#:");
+	read = getline(&entry, &length, stdin);/*Read input from the user*/
+	if (read == -1)
 	{
-		printf("Purposedriven#:");
-		read = getline(&entry, &length, stdin);/*Read input from the user*/
-		if (read == -1)
-		{
-			perror("Input error");
-			exit(EXIT_FAILURE);
-		}
-		/*Remove newline character at the end of entry*/
-		entry[read - 1] = '\0';
-		/*Check for empty input*/
-		if (read == 1)
-		{
-			free(entry);
-			continue;
-		}
-		/*Check for the exit command*/
-		if (strcmp(entry, "exit") == 0)
-		{
-			free(entry);
-			exit(EXIT_SUCCESS);
-		}
-		break;
+		perror("Input error");
+		exit(EXIT_FAILURE);
 	}
-	free(entry);/*Free memory allocated for entry*/
-	return (0);
+	/*Remove newline character at the end of entry*/
+	entry[read - 1] = '\0';
+	/*Check for the exit command*/
+	if (strcmp(entry, "exit") == 0)
+	{
+		free(entry);
+		exit(EXIT_SUCCESS);
+	}
+	return (entry);
 }
