@@ -38,7 +38,7 @@ void execCmd(char *command)
 	{
 		if (strcmp(tkn, "cp") == 0)
 		{
-			exectble = "usr/bin/cp";
+			exectble = "/usr/bin/cp";
 		}
 	}
 	while (tkn != NULL && a < 19)
