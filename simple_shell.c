@@ -13,7 +13,6 @@ int main(void)
 	char *entry = NULL;
 	size_t length = 0;
 	ssize_t read;
-	pid_t pid;
 
 	while (1)
 	{
@@ -32,22 +31,7 @@ int main(void)
 			free(entry);
 			exit(EXIT_SUCCESS);
 		}
-		/*Fork a new process*/
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("Fork error");
-			exit(EXIT_FAILURE);
-		}
-		if (pid == 0)
-		{
-			execCmd(entry);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			wait(NULL);
-		}
+		execCmd(entry);
 	}
 	free(entry);/*Free memory allocated for entry*/
 	return (0);
