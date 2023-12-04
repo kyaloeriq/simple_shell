@@ -4,6 +4,11 @@
 #include <sys/wait.h>
 #include <string.h>
 #include "main.h"
+/**
+ * my_strdup - my strdup
+ * @s: argument
+ * Return: dup
+ */
 char *my_strdup(const char *s)
 {
 	size_t len = strlen(s) + 1;
@@ -16,17 +21,17 @@ char *my_strdup(const char *s)
 	return (dup);
 }
 /**
- * execCmd - executes commands
- * @cmd: command
+ * execCmd - executes commands with arguments
+ * @command: command
  */
 void execCmd(char *command)
 {
 	char *cmd = my_strdup(command);
 	char *tkn = strtok(cmd, " ");
-	char *argv[10];
+	char *argv[20];
 	int a = 0;
 
-	while (tkn != NULL)
+	while (tkn != NULL && a < 19)
 	{
 		argv[a++] = tkn;
 		tkn = strtok(NULL, " ");
@@ -36,7 +41,7 @@ void execCmd(char *command)
 	if (execve(argv[0], argv, NULL) == -1)
 	{
 		perror("Command execution error");
-		exit(98);
+		exit(EXIT_FAILURE);
 	}
 	free(cmd);
 }
