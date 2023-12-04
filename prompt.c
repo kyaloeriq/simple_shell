@@ -5,10 +5,10 @@
 #include <string.h>
 #include "main.h"
 /**
- * prompt - simple prompt.
+ * prompt - simple prompt
  * Return: 0
  */
-int prompt(void)
+int prompt(char **command)
 {
 	char *entry = NULL;
 	size_t length = 0;
@@ -27,7 +27,8 @@ int prompt(void)
 	if (strcmp(entry, "exit") == 0)
 	{
 		free(entry);
-		exit(EXIT_SUCCESS);
+		return (0);
 	}
-	return (entry);
+	*command = entry;
+	return (1);/*Indicates program should continue*/
 }
