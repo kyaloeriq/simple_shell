@@ -40,6 +40,7 @@ void forkExec(char *command, char *argv[])
 			waitpid(pid, &status, 0);
 		free(exectblePath), token = strtok(NULL, ":");
 		}
+	}
 		/*if loop completes, command not found*/
 		fprintf(stderr, "Error: %s command not found\n", command);
 		exit(EXIT_FAILURE);
