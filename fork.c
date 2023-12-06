@@ -6,7 +6,7 @@
 #include "main.h"
 /**
  * forkExec - fork and command execution
- * @exectble: executable command
+ * command: executable command
  * @argv: arguments
  */
 void forkExec(char *command, char *argv[])
