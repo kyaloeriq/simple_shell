@@ -31,6 +31,7 @@ void forkExec(char *command, char *argv[])
 			if (access(exectblePath, X_OK) == 0)
 			{
 				argv[0] = strdup(exectblePath);
+				argv[1] = NULL;/*argv is terminated with NULL*/
 				execv(exectblePath, argv);
 				perror("Execution error");
 				exit(EXIT_FAILURE);
