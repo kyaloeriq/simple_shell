@@ -47,5 +47,4 @@ void forkExec(char *command, char *argv[])
 	}
 		/*if loop completes, command not found*/
 		fprintf(stderr, "Error: %s command not found\n", command);
-		exit(EXIT_FAILURE);
 }
