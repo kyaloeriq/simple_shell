@@ -15,21 +15,21 @@ void forkExec(char *command, char *argv[])
 	char *path, *token, *exectblePath;
 	int status;
 
-	path = getenv("PATH");
-	token = strtok(path, ":");
-	while (token != NULL)
+	if (pid == -1)
 	{
-		exectblePath = malloc(strlen(token) + strlen(command) + 2);
-		sprintf(exectblePath, "%s/%s", token, command);
-		if (access(exectblePath, X_OK) == 0)
+		perror("Fork error");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		path = getenv("PATH");
+		token = strtok(path, ":");
+		while (token != NULL)
 		{
-			if (pid == -1)
+			exectblePath = malloc(strlen(token) + strlen(command) + 2);
+			sprintf(exectblePath, "%s/%s", token, command);
+			if (access(exectblePath, X_OK) == 0)
 			{
-				perror("Fork error");
-				exit(EXIT_FAILURE);
-			}
-			else if (pid == 0)
-			{ /*Child process*/
 				argv[0] = strdup(exectblePath);
 				argv[1] = NULL;/*argv is terminated with NULL*/
 				execv(exectblePath, argv);
@@ -37,9 +37,11 @@ void forkExec(char *command, char *argv[])
 				exit(EXIT_FAILURE);
 			}
 		free(exectblePath), token = strtok(NULL, ":");
-		/*if loop completes, command not found*/
 		}
+		/*if loop completes, command not found*/
 		fprintf(stderr, "Error: %s command not found\n", command);
-		waitpid(pid, &status, 0);
+		exit(EXIT_FAILURE);
 	}
+	else
+		waitpid(pid, &status, 0);
 }
