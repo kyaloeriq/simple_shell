@@ -36,14 +36,11 @@ void forkExec(char *command, char *argv[])
 				perror("Execution error");
 				exit(EXIT_FAILURE);
 			}
-			else
-			{	/*Parent process*/
-				waitpid(pid, &status, 0);
-				return;
-			}
-		}
 		free(exectblePath), token = strtok(NULL, ":");
-	}
 		/*if loop completes, command not found*/
 		fprintf(stderr, "Error: %s command not found\n", command);
+		else
+			waitpid(pid, &status, 0);
+		}
+	}
 }
