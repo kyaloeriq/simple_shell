@@ -30,6 +30,7 @@ void forkExec(char *command, char *argv[])
 			sprintf(exectblePath, "%s/%s", token, command);
 			if (access(exectblePath, X_OK) == 0)
 			{
+				argv[0] = strdup(exectblePath);
 				execv(exectblePath, argv);
 				perror("Execution error");
 				exit(EXIT_FAILURE);
