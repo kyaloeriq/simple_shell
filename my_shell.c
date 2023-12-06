@@ -17,7 +17,10 @@ int main(void)
 	{
 		prompt(&command);
 		if (strcmp(command, "exit") == 0)
-			free(command), break;
+		{
+			free(command);
+			break;
+		}
 		cmd = strdup(command), tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
 		if (tkn != NULL)
@@ -27,15 +30,6 @@ int main(void)
 		{
 			tkn = strtok(NULL, " ");
 			argv[a++] = tkn ? strdup(tkn) : NULL;
-		}
-		/*Check if the executable file is accessible*/
-		if (access(argv[0], X_OK) == -1)
-		{
-			fprintf(stderr, "Error:%s command not found\n", exectblePath);
-			free(command), free(cmd);
-			for (i = 0; i < a; ++i)
-				free(argv[i]), argv[i] = NULL;
-			continue;
 		}
 		forkExec(argv[0], argv);
 		/*free dynamically allocated memory*/
