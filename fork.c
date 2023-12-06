@@ -39,8 +39,7 @@ void forkExec(char *command, char *argv[])
 			else
 			{	/*Parent process*/
 				waitpid(pid, &status, 0);
-			free(exectblePath);
-			return;
+				return;
 			}
 		}
 		free(exectblePath), token = strtok(NULL, ":");
