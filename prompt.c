@@ -13,7 +13,7 @@ void prompt(char **command)
 {
 	size_t size = 0;
 
-	printf("Purposedriven#:");
+	printf("Purposedriven#: ");
 	if (getline(command, &size, stdin) == -1)
 	{
 		perror("Input error");
@@ -21,4 +21,8 @@ void prompt(char **command)
 	}
 	/*Remove newline character at the end of *command*/
 	(*command)[strcspn(*command, "\n")] = '\0';
+	if ((*command)[0] == '\0') {
+		printf("Command empty, consider entering a valid one\n");
+		prompt(command);
+	}
 }
