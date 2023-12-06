@@ -13,7 +13,7 @@ void forkExec(char *command, char *argv[])
 {
 	pid_t pid = fork();
 	char *path, *token, *exectblePath;
-	int status, exit_stat;
+	int status;
 
 	path = getenv("PATH");
 	token = strtok(path, ":");
