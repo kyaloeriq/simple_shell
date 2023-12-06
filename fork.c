@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <string.h>
 #include "main.h"
 /**
  * forkExec - fork and command execution
@@ -33,8 +34,7 @@ void forkExec(char *command, char *argv[])
 				perror("Execution error");
 				exit(EXIT_FAILURE);
 			}
-		free(exectblePath);
-		token = strtok(NULL, ":");
+		free(exectblePath), token = strtok(NULL, ":");
 		}
 		/*if loop completes, command not found*/
 		fprintf(stderr, "Error: %s command not found\n", command);
