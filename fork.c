@@ -37,7 +37,7 @@ void forkExec(char *command, char *argv[])
 				exit(EXIT_FAILURE);
 			}
 		else/*Parent process*/
-			waitpid(pid. &status, 0);
+			waitpid(pid, &status, 0);
 		free(exectblePath), token = strtok(NULL, ":");
 		}
 		/*if loop completes, command not found*/
