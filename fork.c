@@ -13,7 +13,7 @@ void forkExec(char *command, char *argv[])
 {
 	pid_t pid = fork();
 	char *path, *token, *exectblePath;
-	int status;
+	int status, exit_stat;
 
 	path = getenv("PATH");
 	token = strtok(path, ":");
@@ -36,10 +36,23 @@ void forkExec(char *command, char *argv[])
 				perror("Execution error");
 				exit(EXIT_FAILURE);
 			}
-		else/*Parent process*/
-			waitpid(pid, &status, 0);
-		free(exectblePath), token = strtok(NULL, ":");
+			else
+			{	/*Parent process*/
+				waitpid(pid, &status, 0);
+				if (WIFEXITED(status))
+				{
+					exit_stat = WEXITSTATUS(status);
+					printf("Child process exited with status: %d\n", exit_stat);
+				}
+				else
+				{
+					fprintf(stderr, "Child process did not exit normally\n");
+				}
+			free(exectblePath);
+			return;
+			}
 		}
+		free(exectblePath), token = strtok(NULL, ":");
 	}
 		/*if loop completes, command not found*/
 		fprintf(stderr, "Error: %s command not found\n", command);
