@@ -21,7 +21,8 @@ void prompt(char **command)
 	}
 	/*Remove newline character at the end of *command*/
 	(*command)[strcspn(*command, "\n")] = '\0';
-	if ((*command)[0] == '\0') {
+	if ((*command)[0] == '\0')
+	{
 		printf("Command empty, consider entering a valid one\n");
 		prompt(command);
 	}
