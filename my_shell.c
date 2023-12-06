@@ -14,27 +14,32 @@ int main(void)
 	int i, a = 0;
 	char *exectblePath = NULL;
 
-	while (1) {
+	while (1)
+	{
 		prompt(&command);
-		if (strcmp(command, "exit") == 0) {
+		if (strcmp(command, "exit") == 0)
+		{
 			free(command);
 			break;
 		}
 		cmd = strdup(command);
 		tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
-		if (tkn != NULL) {
+		if (tkn != NULL)
 			exectblePath = tkn;
-		} a = 0;
-		while (tkn != NULL && a < MAX_ARGS) {
+		a = 0;
+		while (tkn != NULL && a < MAX_ARGS)
+		{
 			argv[a++] = strdup(tkn);
 			tkn = strtok(NULL, " ");
 		} argv[a] = NULL;
 		/*Check if the executable file is accessible*/
-		if (access(exectblePath, X_OK) == -1) {
+		if (access(exectblePath, X_OK) == -1)
+		{
 			fprintf(stderr, "Error:%s command not found\n", exectblePath);
 			free(command), free(cmd);
-			for (i = 0; i < a; ++i) {
+			for (i = 0; i < a; ++i)
+			{
 				free(argv[i]);
 				argv[i] = NULL;
 			}
