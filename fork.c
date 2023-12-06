@@ -39,15 +39,6 @@ void forkExec(char *command, char *argv[])
 			else
 			{	/*Parent process*/
 				waitpid(pid, &status, 0);
-				if (WIFEXITED(status))
-				{
-					exit_stat = WEXITSTATUS(status);
-					printf("Child process exited with status: %d\n", exit_stat);
-				}
-				else
-				{
-					fprintf(stderr, "Child process did not exit normally\n");
-				}
 			free(exectblePath);
 			return;
 			}
