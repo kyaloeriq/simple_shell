@@ -8,26 +8,38 @@
  * @exectble: executable command
  * @argv: arguments
  */
-void forkExec(char *exectble, char *argv[])
+void forkExec(char *command, char *argv[])
 {
 	pid_t pid = fork();
+	char *path, *token, *exectblePath;
+	int status;
 
 	if (pid == -1)
 	{
 		perror("Fork error");
 		exit(EXIT_FAILURE);
 	}
-	if (pid == 0)
+	else if (pid == 0)
 	{
-		if (execve(exectble, argv, environ) == -1)
+		path = getenv("PATH");
+		token = strtok(path, ":");
+		while (token != NULL)
 		{
-			perror("Command execution error");
-			exit(EXIT_FAILURE);
+			exectblePath = malloc(strlen(token) + strlen(command) + 2);
+			sprintf(exectblePath, "%s/%s", token, command);
+			if (access(exectblePath, X_OK) == 0)
+			{
+				execv(exectblePath, argv);
+				perror("Execution error");
+				exit(EXIT_FAILURE);
+			}
+		free(exectblePath);
+		token = strtok(NULL, ":");
 		}
-		exit(EXIT_SUCCESS);
+		/*if loop completes, command not found*/
+		fprintf(stderr, "Error: %s command not found\n", command);
+		exit(EXIT_FAILURE);
 	}
 	else
-	{
-		wait(NULL);
-	}
+		waitpid(pid, &status, 0);
 }
