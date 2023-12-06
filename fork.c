@@ -40,7 +40,9 @@ void forkExec(char *command, char *argv[])
 		/*if loop completes, command not found*/
 		fprintf(stderr, "Error: %s command not found\n", command);
 		else
-			waitpid(pid, &status, 0);
+		{
+		
+		}	waitpid(pid, &status, 0);
 		}
 	}
 }
