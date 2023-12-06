@@ -21,20 +21,26 @@ int main(void)
 			free(command);
 			break;
 		}
-		cmd = strdup(command), tkn = strtok(cmd, " ");
+		cmd = strdup(command);
+		tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
 		if (tkn != NULL)
-			free(argv[0]), argv[0] = strdup(tkn);
+			argv[0] = strdup(tkn);
 		a = 1;/*Start from 1 to keep argv[0] for the command*/
 		while (tkn != NULL && a < MAX_ARGS)
 		{
 			tkn = strtok(NULL, " ");
 			argv[a++] = tkn ? strdup(tkn) : NULL;
 		}
+		argv[a] = NULL;
 		forkExec(argv[0], argv);
 		/*free dynamically allocated memory*/
 		free(command), free(cmd);
 		for (i = 0; i < a; ++i)
-			free(argv[i]), argv[i] = NULL;
-	} return (0);
+		{
+			free(argv[i]);
+			argv[i] = NULL;
+		}
+	}
+	return (0);
 }
