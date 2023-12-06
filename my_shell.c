@@ -12,40 +12,32 @@ int main(void)
 {
 	char *command = NULL, *cmd = NULL, *tkn = NULL, *argv[MAX_ARGS + 1];
 	int i, a = 0;
-	char *exectblePath = NULL;
 
 	while (1)
 	{
 		prompt(&command);
 		if (strcmp(command, "exit") == 0)
-		{
-			free(command);
-			break;
-		}
-		cmd = strdup(command);
-		tkn = strtok(cmd, " ");
+			free(command), break;
+		cmd = strdup(command), tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
 		if (tkn != NULL)
-			exectblePath = tkn;
-		a = 0;
+			free(argv[0]), argv[0] = strdup(tkn);
+		a = 1;/*Start from 1 to keep argv[0] for the command*/
 		while (tkn != NULL && a < MAX_ARGS)
 		{
-			argv[a++] = strdup(tkn);
 			tkn = strtok(NULL, " ");
-		} argv[a] = NULL;
+			argv[a++] = tkn ? strdup(tkn) : NULL;
+		}
 		/*Check if the executable file is accessible*/
-		if (access(exectblePath, X_OK) == -1)
+		if (access(argv[0], X_OK) == -1)
 		{
 			fprintf(stderr, "Error:%s command not found\n", exectblePath);
 			free(command), free(cmd);
 			for (i = 0; i < a; ++i)
-			{
-				free(argv[i]);
-				argv[i] = NULL;
-			}
+				free(argv[i]), argv[i] = NULL;
 			continue;
 		}
-		forkExec(exectblePath, argv);
+		forkExec(argv[0], argv);
 		/*free dynamically allocated memory*/
 		free(command), free(cmd);
 		for (i = 0; i < a; ++i)
