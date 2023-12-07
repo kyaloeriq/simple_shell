@@ -3,9 +3,8 @@
 /**
  * printEnv - prints the current environment
  */
-void printEnv()
+void printEnv(void)
 {
-	extern char **environ;
 	char **env;
 
 	for (env = environ; *env != NULL; env++)
