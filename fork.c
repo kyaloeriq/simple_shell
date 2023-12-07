@@ -15,6 +15,11 @@ void forkExec(char *command, char *argv[])
 	char *path, *token, *exectblePath;
 	int status;
 
+	if (strcmp(command, "env") == 0)
+	{	/*print the environment if command is "env"*/
+		printEnv();
+		return;
+	}
 	if (pid == -1)
 	{
 		perror("Fork error");
