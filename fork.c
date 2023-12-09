@@ -41,11 +41,12 @@ void forkExec(char *command, char *argv[])
 				perror("Execution error");
 				free(argv[0]);
 				exit(EXIT_FAILURE);
-			}
-		free(exectblePath), token = strtok(NULL, ":");
+			} free(exectblePath), token = strtok(NULL, ":");
 		}
 		/*if loop completes, command not found*/
-		fprintf(stderr, "Error: %s command not found\n", command);
+		write(STDERR_FILENO, "Error: ", 7);
+		write(STDERR_FILENO, command, strlen(command));
+		write(STDERR_FILENO, " commnd not found\n", 19);
 		exit(EXIT_FAILURE);
 	}
 	else
