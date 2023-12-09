@@ -39,6 +39,7 @@ void forkExec(char *command, char *argv[])
 				argv[1] = NULL;/*argv is terminated with NULL*/
 				execv(exectblePath, argv);
 				perror("Execution error");
+				free(argv[0]);
 				exit(EXIT_FAILURE);
 			}
 		free(exectblePath), token = strtok(NULL, ":");
