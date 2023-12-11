@@ -36,7 +36,10 @@ int main(void)
 			argv[a++] = tkn ? strdup(tkn) : NULL;
 		}
 		argv[a] = NULL;
-		execCmd(argv[0], argv);
+		if (execCmd(argv[0], argv) != 0)
+		{
+			fprintf(stderr, "Error executing command: %s\n", argv[0]);
+		}
 		/*free dynamically allocated memory*/
 		free(command);
 		free(cmd);
