@@ -35,7 +35,7 @@ void prompt(char **command)
 			perror("Write error");
 			exit(EXIT_FAILURE);
 		}
-		/*Recursive call for prompt to get a non_empty command*/
-		prompt(command);
+		return (0);/*Indicates an empty command*/
 	}
+	return (1);/*Indicates an non-empty command*/
 }
