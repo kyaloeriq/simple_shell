@@ -13,7 +13,7 @@ void forkExec(char *command, char *argv[])
 {
 	pid_t pid = fork();
 	char *path, *token, *exectblePath;
-	int status;
+	int status, a;
 
 	if (strcmp(command, "env") == 0)
 	{	/*print the environment if command is "env"*/
@@ -31,7 +31,22 @@ void forkExec(char *command, char *argv[])
 		{ /*If command contains separator, execute without searching*/
 			execv(command, argv);
 			perror("Execution error"), exit(EXIT_FAILURE);
-		} path = getenv("PATH"), token = strtok(path, ":");
+		} 
+		for (a = 0; environ[a] != NULL; ++a)
+		{
+			if (strncmp(environ[a], "PATH=", 5) == 0)
+			{
+				path = environ[a] + 5;
+				break;
+			}
+		}
+		/*if PATH is not in environ, print an error*/
+		if (path == NULL)
+		{
+			write(STDERR_FILENO, "Error: PATH variable not found\n", 42);
+			exit(EXIT_FAILURE);
+		}
+		token = strtok(path, ":");
 		while (token != NULL)
 		{
 			exectblePath = malloc(strlen(token) + strlen(command) + 2);
