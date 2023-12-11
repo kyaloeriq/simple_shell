@@ -4,7 +4,7 @@
 void prompt(char **command);
 char *my_strdup(const char *s);
 void exec(char *command, char *argv[]);
-void fork(char *command, char *argv[]);
+void forkExec(char *command, char *argv[]);
 void printEnv();
 
 #define MAX_ARGS 20
