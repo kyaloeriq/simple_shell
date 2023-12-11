@@ -7,7 +7,7 @@
 /**
  * forkExec - fork
  * @command: executable command
- * @argv: argument array
+ * @argv: arguments array
  */
 void forkExec(char *command, char *argv[])
 {
