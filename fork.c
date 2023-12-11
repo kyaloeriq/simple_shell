@@ -5,7 +5,7 @@
 #include <string.h>
 #include "main.h"
 /**
- * fork - fork
+ * forkExec - fork
  * @command: executable command
  * @argv: argument array
  */
