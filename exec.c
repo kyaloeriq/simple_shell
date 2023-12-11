@@ -8,8 +8,9 @@
  * exec - command execution
  * @command: executable command
  * @argv: argument array
+ * Return: 0 on success, -1 on failure
  */
-void execCmd(char *command, char *argv[])
+int execCmd(char *command, char *argv[])
 {
 	char *path, *token, *exectblePath;
 	int a;
@@ -47,4 +48,5 @@ void execCmd(char *command, char *argv[])
 	write(STDERR_FILENO, command, strlen(command));
 	write(STDERR_FILENO, " command not found\n", 19);
 	exit(EXIT_FAILURE);
+	return( -1);
 }
