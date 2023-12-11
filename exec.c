@@ -10,7 +10,7 @@
  * @argv: argument array
  * Return: 0 on success, -1 on failure
  */
-void execCmd(char *command, char *argv[])
+int execCmd(char *command, char *argv[])
 {
 	char *path, *token, *exectblePath;
 	int a;
