@@ -24,6 +24,7 @@ int main(void)
 			free(command);
 			break;
 		}
+		forkExec(command, argv);
 		cmd = strdup(command);
 		tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
@@ -36,7 +37,7 @@ int main(void)
 			argv[a++] = tkn ? strdup(tkn) : NULL;
 		}
 		argv[a] = NULL;
-		exec(argv[0], argv);
+		execCmd(argv[0], argv);
 		/*free dynamically allocated memory*/
 		free(command);
 		free(cmd);
