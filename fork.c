@@ -7,7 +7,7 @@
 /**
  * forkExec - fork and command execution
  * @command: executable command
- * @argv: arguments
+ * @argv: argument array
  */
 void forkExec(char *command, char *argv[])
 {
@@ -40,6 +40,7 @@ void forkExec(char *command, char *argv[])
 				execv(exectblePath, argv);
 				perror("Execution error");
 				free(argv[0]);
+				free(exectblePath);
 				exit(EXIT_FAILURE);
 			} free(exectblePath), token = strtok(NULL, ":");
 		}
