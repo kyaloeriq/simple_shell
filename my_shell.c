@@ -24,7 +24,6 @@ int main(void)
 			free(command);
 			break;
 		}
-		forkExec(command, argv);
 		cmd = strdup(command);
 		tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
