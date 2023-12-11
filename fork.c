@@ -39,7 +39,8 @@ void forkExec(char *command, char *argv[])
 				perror("Execution error");
 				free(exectblePath);
 				exit(EXIT_FAILURE);
-			} free(exectblePath), token = strtok(NULL, ":");
+			}
+			free(exectblePath), token = strtok(NULL, ":");
 		} /*if loop completes, command not found*/
 		write(STDERR_FILENO, "Error: ", 7);
 		write(STDERR_FILENO, command, strlen(command));
