@@ -36,9 +36,10 @@ void forkExec(char *command, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 		execCmd(command, argv);
+		exit(EXIT_FAILURE);
 	}
 	else
-	{
+	{ /*Parent process*/
 		waitpid(pid, &status, 0);
 	}
 }
