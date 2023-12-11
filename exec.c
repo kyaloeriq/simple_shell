@@ -5,7 +5,7 @@
 #include <string.h>
 #include "main.h"
 /**
- * exec - command execution
+ * execCmd - command execution
  * @command: executable command
  * @argv: argument array
  * Return: 0 on success, -1 on failure
@@ -43,7 +43,7 @@ int execCmd(char *command, char *argv[])
 		sprintf(exectblePath, "%s/%s", token, command);
 		if (access(exectblePath, X_OK) == 0)
 		{
-			execv(exectblePath, argv);	
+			execv(exectblePath, argv);
 			perror("Execution error");
 			free(exectblePath);
 		}
