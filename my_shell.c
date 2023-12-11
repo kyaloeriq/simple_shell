@@ -35,7 +35,8 @@ int main(void)
 		argv[a] = NULL;
 		forkExec(argv[0], argv);
 		/*free dynamically allocated memory*/
-		free(command), free(cmd);
+		free(command);
+		free(cmd);
 		for (i = 0; i < a; ++i)
 		{
 			free(argv[i]);
