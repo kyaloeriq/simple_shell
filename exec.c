@@ -9,7 +9,7 @@
  * @command: executable command
  * @argv: argument array
  */
-void exec(char *command, char *argv[])
+void execCmd(char *command, char *argv[])
 {
 	char *path, *token, *exectblePath;
 	int a;
