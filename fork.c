@@ -39,11 +39,11 @@ void forkExec(char *command, char *argv[])
 				argv[1] = NULL;/*argv is terminated with NULL*/
 				execv(exectblePath, argv);
 				perror("Execution error");
-				free(argv[0]), (exectblePath);
+				free(argv[0]);
+				free(exectblePath);
 				exit(EXIT_FAILURE);
 			} free(exectblePath), token = strtok(NULL, ":");
-		}
-		/*if loop completes, command not found*/
+		} /*if loop completes, command not found*/
 		write(STDERR_FILENO, "Error: ", 7);
 		write(STDERR_FILENO, command, strlen(command));
 		write(STDERR_FILENO, " commnd not found\n", 19);
