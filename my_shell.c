@@ -33,7 +33,7 @@ int main(void)
 			argv[a++] = tkn ? strdup(tkn) : NULL;
 		}
 		argv[a] = NULL;
-		exec(argv);
+		exec(argv[0], argv);
 		/*free dynamically allocated memory*/
 		free(command);
 		free(cmd);
