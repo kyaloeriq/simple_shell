@@ -10,7 +10,7 @@
  * @argv: argument array
  * Return: 0 on success, -1 on failure
  */
-int execCmd(char *command, char *argv[])
+void execCmd(char *command, char *argv[])
 {
 	char *path, *token, *exectblePath;
 	int a;
@@ -26,7 +26,7 @@ int execCmd(char *command, char *argv[])
 	/*if PATH is not in environ, print an error*/
 	if (path == NULL)
 	{
-		write(STDERR_FILENO, "Error: PATH variable not found\n", 42);
+		perror("Error: PATH variable not found\n");
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(path, ":");
@@ -36,17 +36,16 @@ int execCmd(char *command, char *argv[])
 		sprintf(exectblePath, "%s/%s", token, command);
 		if (access(exectblePath, X_OK) == 0)
 		{
-			execv(exectblePath, argv);
-			perror("Execution error");
-			free(exectblePath);
-			exit(EXIT_SUCCESS);
+			if (execv(exectblePath, argv) == -1)
+			{	
+				perror("Execution error");
+				free(exectblePath);
+				exit(EXIT_FAILURE);
+			}
 		}
 		free(exectblePath);
 		token = strtok(NULL, ":");
 	} /*if loop completes, command not found*/
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, command, strlen(command));
-	write(STDERR_FILENO, " command not found\n", 19);
+	perror("Command not found");
 	exit(EXIT_FAILURE);
-	return( -1);
 }
