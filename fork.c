@@ -9,7 +9,7 @@
  * @command: executable command
  * @argv: argument array
  */
-void fork(char *command, char *argv[])
+void forkExec(char *command, char *argv[])
 {
 	pid_t pid = fork();
 	int status;
