@@ -3,7 +3,7 @@
 
 int prompt(char **command);
 char *my_strdup(const char *s);
-int execCmd(char *command, char *argv[]);
+void execCmd(char *command, char *argv[]);
 void forkExec(char *command, char *argv[]);
 void printEnv();
 
