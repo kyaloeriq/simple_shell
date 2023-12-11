@@ -41,6 +41,8 @@ void exec(char *command, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 		free(exectblePath), token = strtok(NULL, ":");
+		if (token != NULL)
+			break;
 	} /*if loop completes, command not found*/
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, command, strlen(command));
