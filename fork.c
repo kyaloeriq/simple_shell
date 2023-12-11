@@ -15,7 +15,7 @@ void fork(char *command, char *argv[])
 	int status;
 
 	if (strcmp(command, "env") == 0)
-	{	
+	{
 		/*print the environment if command is "env"*/
 		printEnv();
 		return;
@@ -26,7 +26,7 @@ void fork(char *command, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
-	{ 
+	{
 		/*Child process*/
 		if (strchr(command, '/') != NULL)
 		{
@@ -34,7 +34,7 @@ void fork(char *command, char *argv[])
 			execv(command, argv);
 			perror("Execution error");
 			exit(EXIT_FAILURE);
-		} 
+		}
 		exec(command, argv);
 	}
 	else
