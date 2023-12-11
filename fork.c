@@ -26,7 +26,7 @@ void forkExec(char *command, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
-	{
+	{ /*Child process*/
 		path = getenv("PATH");
 		token = strtok(path, ":");
 		while (token != NULL)
@@ -35,18 +35,15 @@ void forkExec(char *command, char *argv[])
 			sprintf(exectblePath, "%s/%s", token, command);
 			if (access(exectblePath, X_OK) == 0)
 			{
-				argv[0] = strdup(exectblePath);
-				argv[1] = NULL;/*argv is terminated with NULL*/
 				execv(exectblePath, argv);
 				perror("Execution error");
-				free(argv[0]);
 				free(exectblePath);
 				exit(EXIT_FAILURE);
 			} free(exectblePath), token = strtok(NULL, ":");
 		} /*if loop completes, command not found*/
 		write(STDERR_FILENO, "Error: ", 7);
 		write(STDERR_FILENO, command, strlen(command));
-		write(STDERR_FILENO, " commnd not found\n", 19);
+		write(STDERR_FILENO, " command not found\n", 19);
 		exit(EXIT_FAILURE);
 	}
 	else
