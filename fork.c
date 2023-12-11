@@ -27,6 +27,12 @@ void forkExec(char *command, char *argv[])
 	}
 	else if (pid == 0)
 	{ /*Child process*/
+		if (strchr(command, '/') != NULL)
+		{ /*If command contains separator, execute without searching*/
+			execv(command, argv);
+			perror("Execution error");
+			exit(EXIT_FAILURE);
+		}
 		path = getenv("PATH");
 		token = strtok(path, ":");
 		while (token != NULL)
