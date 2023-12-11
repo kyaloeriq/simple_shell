@@ -24,7 +24,7 @@ void forkExec(char *command, char *argv[])
 		/*Child process*/
 		if (strcmp(command, "env") == 0)
 		{
-                /*print the environment if command is "env"*/
+		/*print the environment if command is "env"*/
 		printEnv();
 		exit(EXIT_SUCCESS);
 		}
