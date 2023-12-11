@@ -38,12 +38,13 @@ void exec(char *command, char *argv[])
 			execv(exectblePath, argv);
 			perror("Execution error");
 			free(exectblePath);
-			exit(EXIT_FAILURE);
+			_exit(EXIT_FAILURE);
 		}
-		free(exectblePath), token = strtok(NULL, ":");
+		free(exectblePath);
+		token = strtok(NULL, ":");
 	} /*if loop completes, command not found*/
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, command, strlen(command));
 	write(STDERR_FILENO, " command not found\n", 19);
-	exit(EXIT_FAILURE);
+	_exit(EXIT_FAILURE);
 }
