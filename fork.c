@@ -35,7 +35,11 @@ void forkExec(char *command, char *argv[])
 			perror("Execution error");
 			exit(EXIT_FAILURE);
 		}
-		execCmd(command, argv);
+		if (execCmd(command, argv) != 0)
+		{
+			fprintf(stderr, "Error executing command: %s\n", command);
+			exit(EXIT_FAILURE);
+		}
 		exit(EXIT_FAILURE);
 	}
 	else
