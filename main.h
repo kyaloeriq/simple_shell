@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-void prompt(char **command);
+int prompt(char **command);
 char *my_strdup(const char *s);
 void exec(char *command, char *argv[]);
 void forkExec(char *command, char *argv[]);
