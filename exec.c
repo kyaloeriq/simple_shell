@@ -15,6 +15,13 @@ void execCmd(char *command, char *argv[])
 	char *path, *token, *exectblePath;
 	int a;
 
+	if (strchr(command, '/') != NULL)
+	{
+		/*Likely an absolute path*/
+		execv(command, argv);
+		perror("Execution error");
+		exit(EXIT_FAILURE);
+	}
 	for (a = 0; environ[a] != NULL; ++a)
 	{
 		if (strncmp(environ[a], "PATH=", 5) == 0)
@@ -36,12 +43,9 @@ void execCmd(char *command, char *argv[])
 		sprintf(exectblePath, "%s/%s", token, command);
 		if (access(exectblePath, X_OK) == 0)
 		{
-			if (execv(exectblePath, argv) == -1)
-			{	
-				perror("Execution error");
-				free(exectblePath);
-				exit(EXIT_FAILURE);
-			}
+			execv(exectblePath, argv);	
+			perror("Execution error");
+			free(exectblePath);
 		}
 		free(exectblePath);
 		token = strtok(NULL, ":");
