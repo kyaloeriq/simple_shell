@@ -15,7 +15,10 @@ int main(void)
 
 	while (1)
 	{
-		prompt(&command);
+		if (!prompt(&command))
+		{
+			continue;
+		}
 		if (strcmp(command, "exit") == 0)
 		{
 			free(command);
