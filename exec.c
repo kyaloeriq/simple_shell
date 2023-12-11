@@ -38,7 +38,7 @@ void execCmd(char *command, char *argv[])
 			execv(exectblePath, argv);
 			perror("Execution error");
 			free(exectblePath);
-			_exit(EXIT_FAILURE);
+			exit(EXIT_SUCCESS);
 		}
 		free(exectblePath);
 		token = strtok(NULL, ":");
@@ -46,5 +46,5 @@ void execCmd(char *command, char *argv[])
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, command, strlen(command));
 	write(STDERR_FILENO, " command not found\n", 19);
-	_exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
