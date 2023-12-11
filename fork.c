@@ -14,12 +14,6 @@ void forkExec(char *command, char *argv[])
 	pid_t pid = fork();
 	int status;
 
-	if (strcmp(command, "env") == 0)
-	{
-		/*print the environment if command is "env"*/
-		printEnv();
-		return;
-	}
 	if (pid == -1)
 	{
 		perror("Fork error");
@@ -28,6 +22,12 @@ void forkExec(char *command, char *argv[])
 	else if (pid == 0)
 	{
 		/*Child process*/
+		if (strcmp(command, "env") == 0)
+		{
+                /*print the environment if command is "env"*/
+		printEnv();
+		exit(EXIT_SUCCESS);
+		}
 		if (strchr(command, '/') != NULL)
 		{
 			/*If command contains separator, execute without searching*/
@@ -35,7 +35,7 @@ void forkExec(char *command, char *argv[])
 			perror("Execution error");
 			exit(EXIT_FAILURE);
 		}
-		exec(command, argv);
+		execCmd(command, argv);
 	}
 	else
 	{
