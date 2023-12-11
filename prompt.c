@@ -7,9 +7,9 @@
 /**
  * prompt - simple prompt
  * @command: executable commands
- * Return: 0
+ * Return: 1 incase of a non-empty command, 0 otherwise
  */
-void prompt(char **command)
+int prompt(char **command)
 {
 	size_t size = 0;
 	const char prompt_msg[] = "Purposedriven#: ";
