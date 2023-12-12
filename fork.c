@@ -26,7 +26,6 @@ void forkExec(char *command, char *argv[])
 		{
 		/*print the environment if command is "env"*/
 		printEnv();
-		exit(EXIT_SUCCESS);
 		}
 		if (strchr(command, '/') != NULL)
 		{
@@ -35,10 +34,9 @@ void forkExec(char *command, char *argv[])
 			perror("Execution error");
 			exit(EXIT_FAILURE);
 		}
-		if (execCmd(command, argv) != 0)
+		if (execCmd(command, argv, exitStat) != 0)
 		{
 			fprintf(stderr, "Error executing command: %s\n", command);
-			exit(EXIT_FAILURE);
 		}
 		exit(EXIT_FAILURE);
 	}
