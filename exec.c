@@ -14,8 +14,9 @@
 int execCmd(char *command, char *argv[], int exitStat)
 {
 	char *path, *token, *exectblePath;
-	int a, exitStat = 0;
-
+	int a;
+	
+	exitStat = 0;
 	if (strchr(command, '/') != NULL)
 	{
 		/*Likely an absolute path*/
