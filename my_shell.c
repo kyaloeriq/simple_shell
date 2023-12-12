@@ -24,13 +24,11 @@ int main(void)
 		if (!prompt(command))
 		{
 			free(command);
-			continue;
-		}
+			continue; }
 		if (strcmp(command, "exit") == 0)
 		{
 			free(command);
-			break;
-		}
+			break; }
 		cmd = strdup(command);
 		tkn = strtok(cmd, " ");
 		/*Check if user specified a different command*/
@@ -49,8 +47,7 @@ int main(void)
 		free(cmd);
 		for (i = 0; i < a; ++i)
 		{
-			free(argv[i]);
-		}
+			free(argv[i]); }
 	}
 	return (0);
 }
