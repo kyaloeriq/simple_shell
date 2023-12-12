@@ -36,6 +36,7 @@ ssize_t my_getline(int fd, char *line, size_t maxchar)
 		}
 		else
 		{
+			perror("Error reading from file");
 			return (-1);/*Error reading from file*/
 		}
 	}
