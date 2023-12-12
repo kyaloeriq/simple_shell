@@ -25,5 +25,9 @@ ssize_t my_getline(int fd, char *line, size_t maxchar)
 		line[bytesRead - 1] = '\0';/*Remove newline character*/
 		return (bytesRead);
 	}
+	if (bytesRead == 0)
+	{
+		return (0);/*EOF*/
+	}
 	return (bytesRead);
 }

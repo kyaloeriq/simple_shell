@@ -15,8 +15,15 @@ int main(void)
 
 	while (1)
 	{
+		command = (char *)malloc(MAX_COMMAND_LENGTH);
+		if (command == NULL)
+		{
+			perror("Memory allocation error");
+			exit(EXIT_FAILURE);
+		}
 		if (!prompt(command))
 		{
+			free(command);
 			continue;
 		}
 		if (strcmp(command, "exit") == 0)
