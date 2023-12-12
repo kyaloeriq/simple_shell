@@ -11,7 +11,7 @@
  */
 int prompt(char *command)
 {
-	size_t size = 0;
+	size_t size = strcspn(command, "\n");
 	const char prompt_msg[] = "Purposedriven#: ";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
 	
@@ -28,8 +28,7 @@ int prompt(char *command)
 		exit(EXIT_FAILURE);
 	}
 	/*Remove newline character at the end of *command*/
-	size = strcspn(command, "\n");
-	command[size] == '\0';
+	command[size] = '\0';
 	if (command[0] == '\0')
 	{
 		if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
