@@ -14,7 +14,7 @@
 int execCmd(char *command, char *argv[], int exitStat)
 {
 	char *path, *token, *exectblePath;
-	int a;
+	int a, exitStat = 0;
 
 	if (strchr(command, '/') != NULL)
 	{
