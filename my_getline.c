@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "main.h"
 /**
  * my_getline - my personal getline
@@ -17,14 +18,14 @@ ssize_t my_getline(int fd, char *line, size_t maxchar)
 	{
 		return (-1);
 	}
-	while (tlBytsRead < maxchar - 1)
+	while (tlBytsRead < (ssize_t)maxchar - 1)
 	{
 		bytesRead = read(fd, line + tlBytsRead, 1);
 		if (bytesRead > 0)
 		{
-			if (s[tlBytsRead] == '\n')
+			if (line[tlBytsRead] == '\n')
 			{
-				s[tlBytsRead] = '\0';/*Remove newline character*/
+				line[tlBytsRead] = '\0';/*Remove newline character*/
 				return (tlBytsRead);
 			}
 			tlBytsRead += bytesRead;
