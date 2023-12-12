@@ -11,7 +11,6 @@
  */
 int prompt(char *command)
 {
-	char command[MAX_COMMAND_LENGTH];
 	size_t size = 0;
 	const char prompt_msg[] = "Purposedriven#: ";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
