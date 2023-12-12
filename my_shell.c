@@ -15,7 +15,7 @@ int main(void)
 
 	while (1)
 	{
-		if (!prompt(&command))
+		if (!prompt(command))
 		{
 			continue;
 		}
