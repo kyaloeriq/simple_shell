@@ -8,9 +8,10 @@
  * execCmd - command execution
  * @command: executable command
  * @argv: argument array
+ * @exitStat: exit status for the shell
  * Return: 0 on success, -1 on failure
  */
-int execCmd(char *command, char *argv[])
+int execCmd(char *command, char *argv[], int exitStat)
 {
 	char *path, *token, *exectblePath;
 	int a;
@@ -51,5 +52,5 @@ int execCmd(char *command, char *argv[])
 		token = strtok(NULL, ":");
 	} /*if loop completes, command not found*/
 	perror("Command not found");
-	exit(EXIT_FAILURE);
+	exit(exitStat);
 }
