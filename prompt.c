@@ -21,7 +21,7 @@ int prompt(char *command)
 		exit(EXIT_FAILURE);
 	}
 	/*Use getline to read user input*/
-	if (my_getline(STDIN_FILENO, command, MAX_COMMAND_LENGTH) == -1)
+	if (my_getline(STDIN_FILENO, command, MAX_COMMAND_LENGTH) <= 0)
 	{
 		perror("Input error");
 		exit(EXIT_FAILURE);

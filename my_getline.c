@@ -23,12 +23,12 @@ ssize_t my_getline(int fd, char *line, size_t maxchar)
 		bytesRead = read(fd, line + tlBytsRead, 1);
 		if (bytesRead > 0)
 		{
-			if (line[tlBytsRead] == '\n')
+			tlBytsRead += bytesRead;
+			if (line[tlBytsRead - 1] == '\n')
 			{
 				line[tlBytsRead] = '\0';/*Remove newline character*/
 				return (tlBytsRead);
 			}
-			tlBytsRead += bytesRead;
 		}
 		else if (bytesRead == 0)
 		{
@@ -39,5 +39,6 @@ ssize_t my_getline(int fd, char *line, size_t maxchar)
 			return (-1);/*Error reading from file*/
 		}
 	}
+	line[tlBytsRead] = '\0';
 	return (tlBytsRead);
 }
