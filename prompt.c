@@ -9,7 +9,7 @@
  * @command: executable commands
  * Return: 1 incase of a non-empty command, 0 otherwise
  */
-void prompt()
+int prompt(char *command)
 {
 	char command[MAX_COMMAND_LENGTH];
 	size_t size = 0;
