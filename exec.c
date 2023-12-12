@@ -16,13 +16,19 @@ int execCmd(char *command, char *argv[], int exitStat)
 	char *path, *token, *exectblePath;
 	int a;
 	
-	exitStat = 0;
 	if (strchr(command, '/') != NULL)
-	{
-		/*Likely an absolute path*/
+	{ /*Likely an absolute path*/
 		execv(command, argv);
 		perror("Execution error");
 		exit(EXIT_FAILURE);
+	} /*Check if command is "exit"*/
+	if (strcmp(command, "exit") == 0)
+	{
+		if (argv[1] != NULL)
+		{
+			exitStat = atoi(argv[1]);
+		}
+		exit(exitStat);/*Exit shell with specified status*/
 	}
 	for (a = 0; environ[a] != NULL; ++a)
 	{
@@ -31,8 +37,7 @@ int execCmd(char *command, char *argv[], int exitStat)
 			path = environ[a] + 5;
 			break;
 		}
-	}
-	/*if PATH is not in environ, print an error*/
+	} /*if PATH is not in environ, print an error*/
 	if (path == NULL)
 	{
 		perror("Error: PATH variable not found\n");
