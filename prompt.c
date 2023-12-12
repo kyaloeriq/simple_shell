@@ -27,14 +27,15 @@ int prompt(char *command)
 		perror("Input error");
 		exit(EXIT_FAILURE);
 	}
-	else
+	else if (bytesRead == 0)
 	{
+		return (0);/*Handle EOF*/
+	}
 	/*Remove newline character at the end of *command*/
-		size = strlen(command);
-		if (size > 0 && command[size - 1] == '\n')
-		{
-			command[size - 1] = '\0';
-		}
+	size = strlen(command);
+	if (size > 0 && command[size - 1] == '\n')
+	{
+		command[size - 1] = '\0';
 	}
 	if (command[0] == '\0')
 	{
