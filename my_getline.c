@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <string.h>
 #include <unistd.h>
 #include "main.h"
 /**
@@ -30,16 +32,29 @@ ssize_t my_getline(int fd, char *line, size_t maxchar)
 				return (tlBytsRead);
 			}
 		}
+		else if (bytesRead == 0 && tlBytsRead == 0)
+		{
+			return (0); /*Reached EOF without any bytes*/
+		}
 		else if (bytesRead == 0)
 		{
-			break; /*Reached EOF*/
+			break;/*Reached EOF after reading some bytes*/
 		}
-		else
+		else if (bytesRead == -1 && errno != EINTR)
 		{
 			perror("Error reading from file");
 			return (-1);/*Error reading from file*/
 		}
+		else if (bytesRead == -1 && errno == EINTR)
+		{
+			perror("Error reading from file");
+			return (-1);
+		}
 	}
-	line[tlBytsRead] = '\0';
-	return (tlBytsRead);
+	if (tlBytsRead > 0)
+	{
+		line[tlBytsRead] = '\0';
+		return (tlBytsRead);
+	}
+	return (-1);
 }
