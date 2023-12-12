@@ -14,7 +14,8 @@ int prompt(char *command)
 	size_t size = 0;
 	const char prompt_msg[] = "Purposedriven#: ";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
-
+	
+	fgets(command, MAX_COMMAND_LENGTH, stdin);
 	if (write(STDOUT_FILENO, prompt_msg, sizeof(prompt_msg) - 1) == -1)
 	{
 		perror("Write error");
@@ -27,8 +28,9 @@ int prompt(char *command)
 		exit(EXIT_FAILURE);
 	}
 	/*Remove newline character at the end of *command*/
-	(*command)[strcspn(*command, "\n")] = '\0';
-	if ((*command)[0] == '\0')
+	size = strcspn(command, "\n");
+	command[size] == '\0';
+	if (command[0] == '\0')
 	{
 		if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
 		{
