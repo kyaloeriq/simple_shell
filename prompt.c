@@ -9,8 +9,9 @@
  * @command: executable commands
  * Return: 1 incase of a non-empty command, 0 otherwise
  */
-int prompt(char **command)
+void prompt()
 {
+	char command[MAX_COMMAND_LENGTH];
 	size_t size = 0;
 	const char prompt_msg[] = "Purposedriven#: ";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
@@ -21,7 +22,7 @@ int prompt(char **command)
 		exit(EXIT_FAILURE);
 	}
 	/*Use getline to read user input*/
-	if (getline(command, &size, stdin) == -1)
+	if (my_getline(STDIN_FILENO, command, sizeof(command)) == -1)
 	{
 		perror("Input error");
 		exit(EXIT_FAILURE);
