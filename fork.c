@@ -12,7 +12,7 @@
 void forkExec(char *command, char *argv[])
 {
 	pid_t pid = fork();
-	int status;
+	int status, exitStat = 0;
 
 	if (pid == -1)
 	{
