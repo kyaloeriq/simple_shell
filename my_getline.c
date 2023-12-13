@@ -14,8 +14,8 @@
 ssize_t my_getline(int fd, char *line, size_t maxchar)
 {
 	static char buffer[BUFFER_SIZE];
-	static size_t bufferInd = 0;
-	static size_t bytesRead = 0;
+	static ssize_t bufferInd = 0;
+	static ssize_t bytesRead = 0;
 
 	ssize_t tBytesRead = 0;
 	size_t lineInd = 0;
