@@ -14,7 +14,7 @@ int prompt(char *command)
 	size_t size;
 	const char prompt_msg[] = "Purposedriven#: ";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
-	const char not_found_msg = "Executable not found\n";
+	const char not_found_msg[] = "Executable not found\n";
 	ssize_t bytesRead;
 
 	while (1)
@@ -48,7 +48,7 @@ int prompt(char *command)
 		{
 			if (!valCmds(command))
 			{
-				if (write(STDERR_FILENO, not_found_msg, sizeof(not_found_msg) - 1) == -1)
+				if (write(STDERR_FILENO, not_found_msg, strlen(not_found_msg) - 1) == -1)
 				{
 					perror("Write error");
 					exit(EXIT_FAILURE); }
