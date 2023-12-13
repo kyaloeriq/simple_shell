@@ -51,7 +51,7 @@ int prompt(char *command)
 				if (write(STDERR_FILENO, not_found_msg, strlen(not_found_msg)) == -1)
 				{
 					perror("Write error");
-					exit(EXIT_FAILURE); }
+					return (0); }
 			}
 			else
 			{
