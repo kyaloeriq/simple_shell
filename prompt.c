@@ -34,8 +34,7 @@ int prompt(char *command)
 	size = 0;
 	while (command[size] != '\0' && command[size] != '\n')
 	{
-		size++;
-	}
+		size++; }
 	if (size > 0)/*Check for non_empty command*/
 	{
 		if (command[size - 1] == '\n')
@@ -48,9 +47,7 @@ int prompt(char *command)
 			if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
 			{
 				perror("Input error");
-				exit(EXIT_FAILURE); }
-		}
-		return (0);/*Return 0 for an empty command*/
-	}
+				exit(EXIT_FAILURE); }}
+		return (0);/*Return 0 for an empty command*/ }
 	return (1);/*Indicates a valid non-empty command*/
 }
