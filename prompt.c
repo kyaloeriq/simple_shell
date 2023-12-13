@@ -12,7 +12,7 @@
 int prompt(char *command)
 {
 	size_t size;
-	const char prompt_msg[] = "Purposedriven#: ";
+	const char prompt_msg[] = "Purposedriven#: \n";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
 	ssize_t bytesRead;
 
