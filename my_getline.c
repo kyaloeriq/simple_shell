@@ -13,21 +13,41 @@
  */
 ssize_t my_getline(int fd, char *line, size_t maxchar)
 {
-	ssize_t bytesRead = read(fd, line, maxchar);
+	static char buffer[BUFFER_SIZE];
+	static size_t bufferInd = 0;
+	static size_t bytesRead = 0;
 
-	if (bytesRead == -1)
+	ssize_t tBytesRead = 0;
+	size_t lineInd = 0;
+
+	while (lineInd < maxchar)
 	{
-		perror("Error reading from file");
-		return (-1);
+		/*if buffer is empty, read more*/
+		if (bufferInd == bytesRead)
+		{
+			bytesRead = read(fd, buffer, sizeof(buffer));
+			/*Check for errors*/
+			if (bytesRead == -1)
+			{
+				perror("Error reading from file");
+				return (-1);
+			}
+			/*if no more data available, return total read*/
+			if (bytesRead == 0)
+			{
+				return (tBytesRead);
+			}
+			bufferInd = 0; /*Reset buffer index*/
+		}
+		/*Copy data from buffer to output line*/
+		line[lineInd++] = buffer[bufferInd++];
+		/*Incase of a newline, remove it and terminate line*/
+		if (line[lineInd - 1] == '\n')
+		{
+			line[lineInd - 1] = '\0';
+			return (tBytesRead + lineInd);
+		}
+		tBytesRead++;
 	}
-	if (bytesRead > 0 && line[bytesRead - 1] == '\n')
-	{
-		line[bytesRead - 1] = '\0';/*Remove newline character*/
-		return (bytesRead);
-	}
-	if (bytesRead == 0)
-	{
-		return (0);/*EOF*/
-	}
-	return (bytesRead);
+	return (tBytesRead);
 }
