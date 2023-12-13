@@ -24,7 +24,7 @@ int main(void)
 		if (!prompt(command))
 		{
 			free(command);
-			continue; }
+			break; }
 		if (strcmp(command, "exit") == 0)
 		{
 			free(command);
