@@ -46,8 +46,7 @@ int prompt(char *command)
 			if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
 			{
 				perror("Input error");
-				exit(EXIT_FAILURE);
-			}
+				exit(EXIT_FAILURE); }
 		}
 	}
 	return (1);/*Indicates a valid non-empty command*/
