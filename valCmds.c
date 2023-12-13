@@ -16,7 +16,7 @@ int valCmds(const char *command)
 
 	if (config_file == NULL)
 	{
-		perror("Error opening configuration file");
+		perror("Error opening configuration file\n");
 		exit(EXIT_FAILURE);
 	}
 	while (1)
@@ -24,7 +24,7 @@ int valCmds(const char *command)
 		bytesRead = my_getline(fileno(config_file), line, sizeof(line));
 		if (bytesRead == -1)
 		{
-			perror("Error reading configuration file");
+			perror("Error reading configuration file\n");
 			exit(EXIT_FAILURE);
 		}
 		else if (bytesRead == 0)
