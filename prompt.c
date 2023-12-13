@@ -39,7 +39,7 @@ int prompt(char *command)
 			command[size - 1] = '\0'; }
 		if (command[0] == '\0')
 		{
-			if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
+			if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg)) == -1)
 			{
 				perror("Write error");
 				exit(EXIT_FAILURE); }
