@@ -30,14 +30,16 @@ int prompt(char *command)
 	else if (bytesRead == 0)
 	{
 		return (0);/*Handle EOF*/ }
-	size = 0;/*Remove newline character at the end of command*/
-	if (command[size] != '\0' && command[size] != '\n')
+	/*Remove newline character at the end of command*/
+	size = 0;
+	while (command[size] != '\0' && command[size] != '\n')
 	{
-		command[size - 1] = '\0'; }
+		size++;
+	}
 	if (command[size - 1] == '\n')
 	{
 		command[size - 1] = '\0'; }
-	if (size == 0)
+	if (bytesRead == 1 && command[0] == '\0')/*Check for empty command*/
 	{
 		if (isatty(STDIN_FILENO))
 		{
@@ -46,7 +48,6 @@ int prompt(char *command)
 				perror("Input error");
 				exit(EXIT_FAILURE);
 			}
-			return (0);
 		}
 	}
 	return (1);/*Indicates a valid non-empty command*/
