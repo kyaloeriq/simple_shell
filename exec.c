@@ -16,6 +16,8 @@ int execCmd(char *command, char *argv[], int exitStat)
 	char *path, *token, *exectblePath;
 	int a;
 
+	if (command[0] == '#')/*Ignore lines starting with #*/
+		return (0);
 	if (strchr(command, '/') != NULL)
 	{ /*Likely an absolute path*/
 		execv(command, argv);
@@ -47,9 +49,7 @@ int execCmd(char *command, char *argv[], int exitStat)
 		if (access(exectblePath, X_OK) == 0)
 		{
 			execv(exectblePath, argv);
-			perror("Execution error");
-			free(exectblePath); }
+			perror("Execution error"), free(exectblePath); }
 		free(exectblePath), token = strtok(NULL, ":");
 	} /*if loop completes, command not found*/
-	perror("Command not found"), exit(exitStat);
-}
+	perror("Command not found"), exit(exitStat); }
