@@ -24,15 +24,19 @@ int main(void)
 		if (!prompt(command))
 		{
 			free(command);
-			break; }
+			continue; }
 		if (strcmp(command, "exit") == 0)
 		{
 			free(command);
 			break; }
 		cmd = strdup(command);
+		if (cmd == NULL)
+		{
+			perror("Memory allocation error");
+			exit(EXIT_FAILURE);
+		}
 		tkn = strtok(cmd, " ");
-		/*Check if user specified a different command*/
-		if (tkn != NULL)
+		if (tkn != NULL)/*Check if user specified a different command*/
 			argv[0] = strdup(tkn);
 		a = 1;/*Start from 1 to keep argv[0] for the command*/
 		while (tkn != NULL && a < MAX_ARGS)
@@ -47,7 +51,6 @@ int main(void)
 		free(cmd);
 		for (i = 0; i < a; ++i)
 		{
-			free(argv[i]); }
-	}
+			free(argv[i]); }}
 	return (0);
 }
