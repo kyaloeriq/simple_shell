@@ -48,7 +48,7 @@ int prompt(char *command)
 		{
 			if (!valCmds(command))
 			{
-				if (write(STDERR_FILENO, not_found_msg, strlen(not_found_msg)) == -1)
+				if (write(STDERR_FILENO, not_found_msg, sizeof(not_found_msg) - 1) == -1)
 				{
 					perror("Input error");
 					exit(EXIT_FAILURE); }
