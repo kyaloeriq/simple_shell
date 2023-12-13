@@ -11,6 +11,7 @@ int valCmds(const char *command);
 
 #define MAX_ARGS 20
 #define MAX_COMMAND_LENGTH 1024
+#define BUFFER_SIZE 4096
 
 extern char **environ;
 
