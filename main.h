@@ -11,6 +11,7 @@ ssize_t my_getline(int fd, char *line, size_t maxchar);
 #define MAX_ARGS 20
 #define MAX_COMMAND_LENGTH 1024
 #define CONFIG_FILE "allowed_commands.txt"
+
 extern char **environ;
 
 #endif
