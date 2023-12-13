@@ -46,16 +46,7 @@ int prompt(char *command)
 		}
 		else
 		{
-			if (!valCmds(command))
-			{
-				if (write(STDERR_FILENO, not_found_msg, sizeof(not_found_msg) - 1) == -1)
-				{
-					perror("Input error");
-					exit(EXIT_FAILURE); }
-			}
-			else
-			{
-				return (1);/*Indicates a valid non-empty command*/ }
+			return (1);/*Indicates a valid non-empty command*/ }
 		}
 	}
 }
