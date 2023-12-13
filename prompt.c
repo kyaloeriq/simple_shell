@@ -36,10 +36,12 @@ int prompt(char *command)
 	{
 		size++;
 	}
-	if (command[size - 1] == '\n')
+	if (size > 0)/*Check for non_empty command*/
 	{
-		command[size - 1] = '\0'; }
-	if (bytesRead == 1 && command[0] == '\0')/*Check for empty command*/
+		if (command[size - 1] == '\n')
+		{
+			command[size - 1] = '\0'; }}
+	else
 	{
 		if (isatty(STDIN_FILENO))
 		{
@@ -48,6 +50,7 @@ int prompt(char *command)
 				perror("Input error");
 				exit(EXIT_FAILURE); }
 		}
+		return (0);/*Return 0 for an empty command*/
 	}
 	return (1);/*Indicates a valid non-empty command*/
 }
