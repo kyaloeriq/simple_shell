@@ -39,9 +39,9 @@ int prompt(char *command)
 			command[size - 1] = '\0'; }
 		if (command[0] == '\0')
 		{
-			if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
+			if (write(STDERR_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
 			{
-				perror("Write error");
+				perror("Input error");
 				exit(EXIT_FAILURE); }
 		}
 		else
@@ -50,7 +50,7 @@ int prompt(char *command)
 			{
 				if (write(STDERR_FILENO, not_found_msg, strlen(not_found_msg)) == -1)
 				{
-					perror("Write error");
+					perror("Input error");
 					exit(EXIT_FAILURE); }
 			}
 			else
