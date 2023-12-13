@@ -11,7 +11,6 @@ int valCmds(const char *command);
 
 #define MAX_ARGS 20
 #define MAX_COMMAND_LENGTH 1024
-#define CONFIG_FILE "/usr/bin/ls"
 
 extern char **environ;
 
