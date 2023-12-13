@@ -4,46 +4,17 @@
 #include <string.h>
 #include "main.h"
 /**
- * valCmds - checks for executables
+ * valCmds - checks for validity of executables
  */
 int valCmds(const char *command)
 {
-	FILE *config_file = fopen(CONFIG_FILE, "r");
-	char line[256];
-	int valid = 0;
-	ssize_t bytesRead;
-	size_t len;
-
-	if (config_file == NULL)
+	if (access(command, X_OK) == 0)
 	{
-		perror("Error opening configuration file\n");
-		exit(EXIT_FAILURE);
+		return (1); /*valid command*/
 	}
-	while (1)
+	else
 	{
-		bytesRead = my_getline(fileno(config_file), line, sizeof(line));
-		if (bytesRead == -1)
-		{
-			perror("Error reading configuration file\n");
-			exit(EXIT_FAILURE);
-		}
-		else if (bytesRead == 0)
-		{
-			break; /*EOF*/
-		}
-		/*Remove newline character*/
-		len = strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-		{
-			line[len - 1] = '\0';
-		}
-		/*Compare user entered command with those in the config file*/
-		if (strcmp(command, line) == 0)
-		{
-			valid = 1;
-			break;
-		}
+		perror("Executable not found");
+		return (0); /*Invalid command*/
 	}
-	fclose(config_file);
-	return (valid);
 }
