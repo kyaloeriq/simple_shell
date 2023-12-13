@@ -5,6 +5,8 @@
 #include "main.h"
 /**
  * valCmds - checks for validity of executables
+ * @command: executables
+ * Return: 1 for a valid command, 0 otherwise
  */
 int valCmds(const char *command)
 {
