@@ -46,8 +46,5 @@ int prompt(char *command)
 		}
 		return (0);/*Command is empty*/
 	}
-	else
-	{
-		return (1);/*Indicates a valid non-empty command*/
-	}
+	return (1);/*Indicates a valid non-empty command*/
 }
