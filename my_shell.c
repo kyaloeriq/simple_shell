@@ -19,8 +19,7 @@ int main(void)
 		if (command == NULL)
 		{
 			perror("Memory allocation error");
-			exit(EXIT_FAILURE);
-		}
+			exit(EXIT_FAILURE); }
 		if (!prompt(command))
 		{
 			free(command);
@@ -33,8 +32,7 @@ int main(void)
 		if (cmd == NULL)
 		{
 			perror("Memory allocation error");
-			exit(EXIT_FAILURE);
-		}
+			exit(EXIT_FAILURE); }
 		tkn = strtok(cmd, " ");
 		if (tkn != NULL)/*Check if user specified a different command*/
 			argv[0] = strdup(tkn);
@@ -42,8 +40,7 @@ int main(void)
 		while (tkn != NULL && a < MAX_ARGS)
 		{
 			tkn = strtok(NULL, " ");
-			argv[a++] = tkn ? strdup(tkn) : NULL;
-		}
+			argv[a++] = tkn ? strdup(tkn) : NULL; }
 		argv[a] = NULL;
 		forkExec(argv[0], argv);
 		/*free dynamically allocated memory*/
@@ -52,5 +49,4 @@ int main(void)
 		for (i = 0; i < a; ++i)
 		{
 			free(argv[i]); }}
-	return (0);
-}
+	return (0); }
