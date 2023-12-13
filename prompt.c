@@ -14,37 +14,53 @@ int prompt(char *command)
 	size_t size;
 	const char prompt_msg[] = "Purposedriven#: ";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
+	const char not_found_msg = "Executable not found\n";
 	ssize_t bytesRead;
 
-	if (write(STDOUT_FILENO, prompt_msg, sizeof(prompt_msg) - 1) == -1)
+	while (1)
 	{
-		perror("Write error");
-		exit(EXIT_FAILURE);
-	}
-	bytesRead = my_getline(STDIN_FILENO, command, MAX_COMMAND_LENGTH);
-	if (bytesRead == -1)
-	{
-		perror("Input error");
-		exit(EXIT_FAILURE);
-	}
-	else if (bytesRead == 0)
-	{
-		return (0);/*Handle EOF*/
-	}
-	/*Remove newline character at the end of *command*/
-	size = strlen(command);
-	if (size > 0 && command[size - 1] == '\n')
-	{
-		command[size - 1] = '\0';
-	}
-	if (command[0] == '\0')
-	{
-		if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
+		if (write(STDOUT_FILENO, prompt_msg, sizeof(prompt_msg) - 1) == -1)
 		{
 			perror("Write error");
 			exit(EXIT_FAILURE);
 		}
-		return (0);/*Indicates an empty command*/
+		bytesRead = my_getline(STDIN_FILENO, command, MAX_COMMAND_LENGTH);
+		if (bytesRead == -1)
+		{
+			perror("Input error");
+			exit(EXIT_FAILURE);
+		}
+		else if (bytesRead == 0)
+		{
+			return (0);/*Handle EOF*/
+		}/*Remove newline character at the end of *command*/
+		size = strlen(command);
+		if (size > 0 && command[size - 1] == '\n')
+		{
+			command[size - 1] = '\0';
+		}
+		if (command[0] == '\0')
+		{
+			if (write(STDOUT_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
+			{
+				perror("Write error");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+		{
+			if (!is_valid_command(command))
+			{
+				if (write(STDERR_FILENO, not_found_msg, sizeof(not_found_msg) - 1) == -1)
+				{
+					perror("Write error");
+					exit(EXIT_FAILURE);
+				}
+			}
+			else
+			{
+				return (1);/*Indicates a valid non-empty command*/
+			}
+		}
 	}
-	return (1);/*Indicates an non-empty command*/
 }
