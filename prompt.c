@@ -21,8 +21,7 @@ int prompt(char *command)
 		if (write(STDOUT_FILENO, prompt_msg, sizeof(prompt_msg) - 1) == -1)
 		{
 			perror("Write error");
-			exit(EXIT_FAILURE); }
-	}
+			exit(EXIT_FAILURE); }}
 	bytesRead = my_getline(STDIN_FILENO, command, MAX_COMMAND_LENGTH);
 	if (bytesRead == -1)
 	{
@@ -31,9 +30,11 @@ int prompt(char *command)
 	else if (bytesRead == 0)
 	{
 		return (0);/*Handle EOF*/ }
-	/*Remove newline character at the end of command*/
-	size = strlen(command);
-	if (size > 0 && command[size - 1] == '\n')
+	size = 0;/*Remove newline character at the end of command*/
+	if (command[size] != '\0' && command[size] != '\n')
+	{
+		command[size - 1] = '\0'; }
+	if (command[size - 1] == '\n')
 	{
 		command[size - 1] = '\0'; }
 	if (command[0] == '\0')
@@ -47,8 +48,6 @@ int prompt(char *command)
 			bytesRead = my_getline(STDIN_FILENO, command, MAX_COMMAND_LENGTH);
 			if (bytesRead == 0)
 			{
-				return (0); }
-		}
-	}
+				return (0); }}}
 	return (1);/*Indicates a valid non-empty command*/
 }
