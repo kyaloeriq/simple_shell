@@ -14,7 +14,6 @@ int prompt(char *command)
 	size_t size;
 	const char prompt_msg[] = "Purposedriven#: ";
 	const char empty_msg[] = "Command empty, consider entering a valid one\n";
-	const char not_found_msg[] = "Executable not found\n";
 	ssize_t bytesRead;
 
 	while (1)
@@ -32,7 +31,8 @@ int prompt(char *command)
 		else if (bytesRead == 0)
 		{
 			return (0);/*Handle EOF*/
-		}/*Remove newline character at the end of *command*/
+		}
+		/*Remove newline character at the end of *command*/
 		size = strlen(command);
 		if (size > 0 && command[size - 1] == '\n')
 		{
@@ -47,6 +47,5 @@ int prompt(char *command)
 		else
 		{
 			return (1);/*Indicates a valid non-empty command*/ }
-		}
 	}
 }
