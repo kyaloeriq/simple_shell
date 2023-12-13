@@ -31,7 +31,7 @@ int prompt(char *command)
 	{
 		return (0);/*Handle EOF*/
 	}
-	/*Remove newline character at the end of *command*/
+	/*Remove newline character at the end of command*/
 	size = strlen(command);
 	if (size > 0 && command[size - 1] == '\n')
 	{
@@ -42,9 +42,12 @@ int prompt(char *command)
 		if (write(STDERR_FILENO, empty_msg, sizeof(empty_msg) - 1) == -1)
 		{
 			perror("Input error");
-			exit(EXIT_FAILURE); }
+			exit(EXIT_FAILURE);
 		}
 		return (0);/*Command is empty*/
 	}
-	return (1);/*Indicates a valid non-empty command*/
+	else
+	{
+		return (1);/*Indicates a valid non-empty command*/
+	}
 }
