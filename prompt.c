@@ -49,7 +49,7 @@ int prompt(char *command)
 		}
 		else
 		{
-			if (!is_valid_command(command))
+			if (!valCmds(command))
 			{
 				if (write(STDERR_FILENO, not_found_msg, sizeof(not_found_msg) - 1) == -1)
 				{
